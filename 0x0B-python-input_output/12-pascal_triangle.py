@@ -1,16 +1,22 @@
 #!/usr/bin/python3
-""" pascal triangle"""
+class Student:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
+    def to_json(self, attrs=None):
+        class_d = self.__dict__
+        sel_d = dict()
 
-def pascal_triangle(n=4500):
-    """print pascal"""
-    pascal = [[0]*i for i in range(1, n+1)]
-    cmpt = 0
-    for i in range(n):
-        pascal[i][0] = 1
-        pascal[i][-1] = 1
-        for j in range(0, i//2):
-            pascal[i][j+1] = pascal[i-1][j] + pascal[i-1][j+1]
-            pascal[i][i-j-1] = pascal[i-1][j] + pascal[i-1][j+1]
+        if type(attrs) is list:
+            for attr in attrs:
+                if type(attr) is not str:
+                    return class_d
 
-    return 
+                if attr in class_d:
+                    sel_d[attr] = class_d[attr]
+
+            return sel_d
+
+        return class_d
